@@ -20,8 +20,8 @@ void showLoadingDialog(BuildContext context) {
         insetPadding: EdgeInsets.zero,
         child: Center(
           child: LoadingAnimationWidget.fourRotatingDots(
-            color: AppColors.primaryBlue,
-            size: AppIconSize.i60,
+            color: ColorManager.colorBlue09,
+            size: AppSize.s60,
           ),
         ),
       );
@@ -85,7 +85,7 @@ void showConfirmDialog({
                   child: const Text(
                     "Cancel",
                     style:
-                        TextStyle(color: AppColors.errorRed, fontSize: 16),
+                        TextStyle(color: ColorManager.colorRedB5, fontSize: 16),
                   ),
                 ),
                 TextButton(
@@ -113,19 +113,19 @@ void showErrorDialog(BuildContext context,
     context: context,
     builder: (_) => Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppRadius.r20),
+        borderRadius: BorderRadius.circular(AppPadding.p20),
       ),
       backgroundColor: Colors.transparent,
       child: Container(
         padding: const EdgeInsets.all(AppPadding.p24),
         decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(AppRadius.r20),
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(AppPadding.p20),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.1),
-              spreadRadius: AppRadius.r2,
-              blurRadius: AppRadius.r8,
+              spreadRadius: AppPadding.p2,
+              blurRadius: AppPadding.p8,
               offset: const Offset(0, 3),
             ),
           ],
@@ -138,29 +138,29 @@ void showErrorDialog(BuildContext context,
               children: [
                 const Icon(
                   Icons.error,
-                  color: AppColors.errorRed,
-                  size: AppIconSize.i40,
+                  color: ColorManager.colorRedB5,
+                  size: AppSize.s40,
                 ),
-                const SizedBox(width: AppGap.g8),
+                const SizedBox(width: AppSize.s8),
                 Text("Error",
                     style: getBoldStyle(
-                        color: AppColors.primaryBlue,
+                        color: ColorManager.colorBlue09,
                         fontSize: FontSize.size20)),
               ],
             ),
-            const SizedBox(height: AppGap.g16),
+            const SizedBox(height: AppSize.s16),
             Text(message ?? '',
                 style: getRegularStyle(
-                    color: AppColors.colorBlack0D,
+                    color: ColorManager.colorBlack_0D,
                     fontSize: FontSize.size16)),
-            const SizedBox(height: AppGap.g24),
+            const SizedBox(height: AppSize.s24),
             TextButton(
               onPressed: () {
                 Navigator.of(context, rootNavigator: true).pop();
               },
               child: Text("Close",
                   style: getBoldStyle(
-                      color: AppColors.primaryBlue,
+                      color: ColorManager.colorBlue09,
                       fontSize: FontSize.size18)),
             ),
           ],
@@ -176,19 +176,19 @@ void showSuccessDialog(BuildContext context,
     context: context,
     builder: (_) => Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(AppRadius.r20),
+        borderRadius: BorderRadius.circular(AppPadding.p20),
       ),
       backgroundColor: Colors.transparent,
       child: Container(
         padding: const EdgeInsets.all(AppPadding.p24),
         decoration: BoxDecoration(
-          color: AppColors.white,
-          borderRadius: BorderRadius.circular(AppRadius.r20),
+          color: ColorManager.white,
+          borderRadius: BorderRadius.circular(AppPadding.p20),
           boxShadow: [
             BoxShadow(
               color: Colors.black.withValues(alpha: 0.1),
-              spreadRadius: AppRadius.r2,
-              blurRadius: AppRadius.r8,
+              spreadRadius: AppPadding.p2,
+              blurRadius: AppPadding.p8,
               offset: const Offset(0, 3),
             ),
           ],
@@ -202,9 +202,9 @@ void showSuccessDialog(BuildContext context,
                 const Icon(
                   Icons.check_circle,
                   color: Colors.green,
-                  size: AppIconSize.i40,
+                  size: AppSize.s40,
                 ),
-                const SizedBox(width: AppGap.g8),
+                const SizedBox(width: AppSize.s8),
                 Text(
                   AppStrings.success.tr(),
                   style: getBoldStyle(
@@ -214,15 +214,15 @@ void showSuccessDialog(BuildContext context,
                 ),
               ],
             ),
-            const SizedBox(height: AppGap.g16),
+            const SizedBox(height: AppSize.s16),
             Text(
               message ?? '',
               style: getRegularStyle(
-                color: AppColors.colorBlack0D,
+                color: ColorManager.colorBlack_0D,
                 fontSize: FontSize.size16,
               ),
             ),
-            const SizedBox(height: AppGap.g24),
+            const SizedBox(height: AppSize.s24),
             TextButton(
               onPressed: () {
                 Navigator.of(context, rootNavigator: true).pop();

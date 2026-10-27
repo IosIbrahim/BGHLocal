@@ -5,19 +5,17 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../resources/resources.dart';
 import '../session/user_session.dart';
-import 'secure_token_storage.dart';
 
 const String _keyLang = 'PREFS_KEY_LANG';
 const String _keyIsLoggedIn = 'PREFS_KEY_IS_USER_LOGGED_IN';
 const String _keyUserSession = 'PREFS_KEY_USER_SESSION';
 const String _keyIsDarkMode = 'IS_DARK_MODE';
 
-/// Stores non-sensitive preferences. The user session (which carries ids such
-/// as userId/hospId/empId) and the auth token are kept in [SecureTokenStorage].
+/// Stores non-sensitive preferences and user display data.
+/// The auth token is stored separately in [SecureTokenStorage].
 class AppPreferences {
   final SharedPreferences _prefs;
-  final SecureTokenStorage _secure;
-  AppPreferences(this._prefs, this._secure);
+  AppPreferences(this._prefs);
 
   // ─── Language ─────────────────────────────────────────────────────────────
 
@@ -49,25 +47,13 @@ class AppPreferences {
   Future<bool> isUserLoggedIn() async =>
       _prefs.getBool(_keyIsLoggedIn) ?? false;
 
-  // ─── User Session (stored encrypted in SecureTokenStorage) ─────────────────
+  // ─── User Session (non-sensitive display data) ────────────────────────────
 
-  Future<void> setUserSession(UserSession session) =>
-      _secure.saveSession(json.encode(session.toJson()));
+  Future<void> setUserSession(UserSession session) async =>
+      _prefs.setString(_keyUserSession, json.encode(session.toJson()));
 
   Future<UserSession?> getUserSession() async {
-    var raw = await _secure.getSession();
-
-    // One-time migration: move any legacy plaintext session out of
-    // SharedPreferences into secure storage so existing users aren't logged out.
-    if (raw == null) {
-      final legacy = _prefs.getString(_keyUserSession);
-      if (legacy != null) {
-        await _secure.saveSession(legacy);
-        await _prefs.remove(_keyUserSession);
-        raw = legacy;
-      }
-    }
-
+    final raw = _prefs.getString(_keyUserSession);
     if (raw == null) return null;
     return UserSession.fromJson(json.decode(raw) as Map<String, dynamic>);
   }
@@ -75,7 +61,6 @@ class AppPreferences {
   Future<void> clearUserSession() async {
     await _prefs.remove(_keyIsLoggedIn);
     await _prefs.remove(_keyUserSession);
-    await _secure.deleteSession();
   }
 
   // ─── Theme ────────────────────────────────────────────────────────────────

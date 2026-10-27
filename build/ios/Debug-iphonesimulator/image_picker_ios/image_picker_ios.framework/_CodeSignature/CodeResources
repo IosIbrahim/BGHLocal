@@ -4,10 +4,6 @@
 <dict>
 	<key>files</key>
 	<dict>
-		<key>Headers/FIPViewProvider.h</key>
-		<data>
-		WY/4FbXtuXIXF/h0NXUfjtv8ovM=
-		</data>
 		<key>Headers/FLTImagePickerImageUtil.h</key>
 		<data>
 		SMlyFZj2SvJBjywLwVFhKKpLQ78=
@@ -42,7 +38,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		CIytI4MvAv4yG8py81bAbrhXK14=
+		o2/jDnyilAveSZpKqXriYeC+3eY=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -50,7 +46,7 @@
 		</data>
 		<key>image_picker_ios_privacy.bundle/Info.plist</key>
 		<data>
-		1tYSQmUTpTDN/L0zoltWlHK5/UQ=
+		EVwv+i42V8uOmZYqFVs+8veYSLc=
 		</data>
 		<key>image_picker_ios_privacy.bundle/PrivacyInfo.xcprivacy</key>
 		<data>
@@ -59,13 +55,6 @@
 	</dict>
 	<key>files2</key>
 	<dict>
-		<key>Headers/FIPViewProvider.h</key>
-		<dict>
-			<key>hash2</key>
-			<data>
-			xR8yM+nXYDf6vdQDX6zn97pFolgAWLjrqRmnTZre00M=
-			</data>
-		</dict>
 		<key>Headers/FLTImagePickerImageUtil.h</key>
 		<dict>
 			<key>hash2</key>
@@ -133,7 +122,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			UscWWw++Y6wo0NaI5DX5UMUPhvEPv411cXkp958ektI=
+			LjkDyIh5tQOs+GagYIur38EVevDnHw1/LG5bDPcBtaI=
 			</data>
 		</dict>
 		<key>image_picker_ios_privacy.bundle/PrivacyInfo.xcprivacy</key>

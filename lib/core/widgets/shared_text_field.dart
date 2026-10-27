@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
   import 'package:flutter_svg/svg.dart';
   import '../resources/resources.dart';
+  import '../theme/color_manager.dart';
   import '../theme/font_manager.dart';
+  import '../resources/resources.dart';
   import '../theme/style_manager.dart';
   import '../theme/theme.dart';
 import '../utils/utils.dart';
 
 class MyTextField extends StatefulWidget {
-  const MyTextField({super.key, 
+  MyTextField({
     required this.hint,
     required this.title,
     required this.suffixIcon,
@@ -48,6 +50,7 @@ class _MyTextFieldState extends State<MyTextField> {
 
   @override
   Widget build(BuildContext context) {
+
     final isArabic = LanguageManager.getCurrentLanguage(context) == ARABIC;
 
     return Padding(
@@ -64,17 +67,15 @@ class _MyTextFieldState extends State<MyTextField> {
                 child: Text(
                   widget.title,
                   style: getBoldStyle(
-                    color: colorDarkOrLightMode(
-                        widget.isDarkMode, AppColors.white,
-                        AppColors.black),
+                    color: colorDarkOrLightMode(widget.isDarkMode , ColorManager.white , ColorManager.black),
                     fontSize: FontSize.size16,
                   ),
                 ),
               ),
-              const SizedBox(height: AppGap.g10),
+              const SizedBox(height: AppSize.s10),
             ],
           )
-              : const SizedBox(height: AppGap.g1),
+              : const SizedBox(height: AppSize.s1),
           TextFormField(
             obscureText: widget.obscureText ? _isObscured : false,
             keyboardType: widget.inputType,
@@ -82,79 +83,57 @@ class _MyTextFieldState extends State<MyTextField> {
             controller: widget.controller,
             readOnly: widget.readOnly,
             style: getMediumStyle(
-              color: colorDarkOrLightMode(
-                  widget.isDarkMode, AppColors.colorGray99,
-                  AppColors.colorBlack0D),
-              fontSize: AppFontSize.f14,
+              color: colorDarkOrLightMode(widget.isDarkMode , ColorManager.colorGrayF3 , ColorManager.colorBlack_0D),
+              fontSize: AppSize.s14,
             ),
             onChanged: (value) {
-              // `takeValue` often does `controller.text = value`, which replaces the
-              // whole [TextEditingValue] and resets the caret/IME state (breaks
-              // backspace and mid-field editing). If the text did not actually
-              // change, restore the value from before the callback.
-              final TextEditingValue beforeTake = widget.controller.value;
               widget.takeValue(value);
-              final TextEditingValue afterTake = widget.controller.value;
-              if (beforeTake.text == afterTake.text &&
-                  beforeTake != afterTake) {
-                widget.controller.value = beforeTake;
-              }
             },
             validator: widget.validator,
             decoration: InputDecoration(
               hintText: widget.hint,
               hintStyle: getRegularStyle(
-                color: colorDarkOrLightMode(
-                    widget.isDarkMode, AppColors.colorBlue1F,
-                    AppColors.colorGray4D),
-                fontSize: AppFontSize.f14,
+                color: colorDarkOrLightMode(widget.isDarkMode , ColorManager.colorGrayF3 , ColorManager.colorGray4D),
+                fontSize: AppSize.s14,
               ),
               filled: true,
-              fillColor: colorDarkOrLightMode(
-                  widget.isDarkMode, AppColors.colorGray37,
-                  AppColors.white),
-              border: const OutlineInputBorder(
+              fillColor: colorDarkOrLightMode(widget.isDarkMode , ColorManager.colorGray37 , ColorManager.white),
+              border: OutlineInputBorder(
                 borderSide: BorderSide(
-                  color: AppColors.white,
-                  width: AppDimension.d1,
+                  color: ColorManager.white,
+                  width: AppSize.s1,
                 ),
-                borderRadius: BorderRadius.all(
-                  Radius.circular(AppRadius.r12),
-                ),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: AppColors.white, width: AppDimension.d2),
-                borderRadius: BorderRadius.all(
-                    Radius.circular(AppRadius.r12)),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(color: colorDarkOrLightMode(
-                    widget.isDarkMode, AppColors.legacyTeal,
-                    AppColors.primaryBlue), width: AppDimension.d2),
                 borderRadius: const BorderRadius.all(
-                    Radius.circular(AppRadius.r12)),
+                  Radius.circular(AppSize.s12),
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: ColorManager.white, width: AppSize.s2_0),
+                borderRadius: const BorderRadius.all(Radius.circular(AppSize.s12)),
+              ),
+              focusedBorder:  OutlineInputBorder(
+                borderSide: BorderSide(color: colorDarkOrLightMode(widget.isDarkMode , ColorManager.colorGreen02 , ColorManager.colorBlue09), width: AppSize.s2_0),
+                borderRadius: const BorderRadius.all(Radius.circular(AppSize.s12)),
               ),
               errorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: AppColors.errorRed, width: AppDimension.d2),
-                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r12)),
+                borderSide: BorderSide(color: ColorManager.colorRedB5, width: AppSize.s2_0),
+                borderRadius: BorderRadius.all(Radius.circular(AppSize.s12)),
               ),
               focusedErrorBorder: const OutlineInputBorder(
-                borderSide: BorderSide(
-                    color: AppColors.errorRed, width: AppDimension.d2),
-                borderRadius: BorderRadius.all(Radius.circular(AppRadius.r12)),
+                borderSide: BorderSide(color: ColorManager.colorRedB5, width: AppSize.s2_0),
+                borderRadius: BorderRadius.all(Radius.circular(AppSize.s12)),
               ),
-              prefixIcon: (widget.prefixIcon.isNotEmpty ?? false)
+              prefixIcon: widget.prefixIcon.isNotEmpty
                   ? Padding(
                 padding: const EdgeInsets.all(AppPadding.p12),
                 child: SvgPicture.asset(
                   widget.prefixIcon,
-                  height: AppIconSize.i15,
-                  width: AppIconSize.i15,
-                  color: colorDarkOrLightMode(
-                      widget.isDarkMode, AppColors.colorGray99,
-                      AppColors.primaryBlue),
+                  height: AppSize.s15,
+                  width: AppSize.s15,
+                  colorFilter: ColorFilter.mode(
+                    colorDarkOrLightMode(widget.isDarkMode, ColorManager.colorGrayF3, ColorManager.colorBlue09),
+                    BlendMode.srcIn,
+                  ),
                 ),
               ) : null,
               suffixIcon: widget.obscureText
@@ -167,20 +146,20 @@ class _MyTextFieldState extends State<MyTextField> {
                 child: Padding(
                   padding: const EdgeInsets.all(AppPadding.p12),
                   child: SvgPicture.asset(
-                    color: AppColors.colorGray9D,
                     _isObscured
                         ? ImageAssets.eyeClosedIcon
                         : ImageAssets.eyeOpenIcon,
-                    height: AppIconSize.i20,
-                    width: AppIconSize.i20,
+                    height: AppSize.s20,
+                    width: AppSize.s20,
+                    colorFilter: ColorFilter.mode(ColorManager.colorGray9D, BlendMode.srcIn),
                   ),
                 ),
               )
                   : getSuffixIcon(),
             ),
-            onTap: widget.readOnly ? () {
+            onTap: widget.readOnly ? (){
               widget.action!();
-            } : null,
+            }:null,
           ),
         ],
       ),
@@ -193,8 +172,8 @@ class _MyTextFieldState extends State<MyTextField> {
         padding: const EdgeInsets.all(AppPadding.p12),
         child: SvgPicture.asset(
           widget.suffixIcon,
-          height: AppIconSize.i20,
-          width: AppIconSize.i20,
+          height: AppSize.s20,
+          width: AppSize.s20,
         ),
       );
     }

@@ -1,15 +1,22 @@
 import 'package:dio/dio.dart';
-import 'package:retrofit/retrofit.dart';
 
-import 'model/login_request.dart';
-import 'model/login_response.dart';
+class AuthApi {
+  final Dio _dio;
 
-part 'auth_api.g.dart';
+  AuthApi(this._dio);
 
-@RestApi()
-abstract class AuthApi {
-  factory AuthApi(Dio dio, {String baseUrl}) = _AuthApi;
-
-  @POST("Hr/Authenticate")
-  Future<ModelLoginResponseRemote> login(@Body() LoginRequest request);
+  Future<dynamic> login(String username, String password) async {
+    try {
+      final response = await _dio.post(
+        'authentication/authenticate',
+        data: {
+          'username': username,
+          'password': password,
+        },
+      );
+      return response.data;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

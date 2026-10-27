@@ -3,15 +3,25 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
 
+/// Owns the Form, TextEditingControllers, field validation,
+/// the "Forgot Password" link, and the Login button.
+///
+/// Constitution rules applied:
+/// - StatefulWidget only because it owns ephemeral local state (controllers)
+/// - Exposes behavior exclusively via [onSubmit] callback
+/// - Never reads BLoC state — receives [isLoading] as a plain bool
 class LoginForm extends StatefulWidget {
+  /// Called when the form is valid and the user taps Login.
   final void Function(String username, String password) onSubmit;
 
-  final bool isDarkMode;
+  /// Driven by the BLoC state — disables the button while a request is in flight.
+  final bool isLoading;
 
   const LoginForm({
     super.key,
-    this.isDarkMode = false,
-    required this.onSubmit});
+    required this.onSubmit,
+    required this.isLoading,
+  });
 
   @override
   State<LoginForm> createState() => _LoginFormState();
@@ -46,44 +56,73 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          MyTextField(
+          // ── Username Field ───────────────────────────────────────────
+          MyTextFieldWithTitle(
             hint: AppStrings.user_name.tr(),
-            title: AppStrings.user_name.tr(),
-            suffixIcon: "",
+            title: '',
+            prefixIcon: ImageAssets.userIcon,
             obscureText: false,
-            isDarkMode: widget.isDarkMode,
-            inputType: TextInputType.text,
+            inputType: TextInputType.name,
             controller: _usernameController,
-            validator: (value) =>
-                (value == null || value.isEmpty) ? AppStrings.user_name.tr() : null,
-            takeValue: (value) {}, prefixIcon: ImageAssets.userIcon,
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppStrings.enter_userName.tr();
+              }
+              return null;
+            },
+            takeValue: (_) {},
           ),
-          const SizedBox(
-            height: AppGap.g14,
-          ),
-          MyTextField(
+          const SizedBox(height: AppSize.s12),
+
+          // ── Password Field ───────────────────────────────────────────
+          MyTextFieldWithTitle(
             hint: AppStrings.password.tr(),
-            title: AppStrings.password.tr(),
-            suffixIcon: "",
+            title: '',
             prefixIcon: ImageAssets.unLockIcon,
             obscureText: true,
-            isDarkMode: widget.isDarkMode,
             inputType: TextInputType.visiblePassword,
             controller: _passwordController,
-            validator: (value) =>
-                (value == null || value.isEmpty) ? AppStrings.password.tr() : null,
-            takeValue: (value) {},
-          ),
-          const SizedBox(height: AppGap.g20),
-          MyButton(
-              color: AppColors.legacyCyan,
-              icon: ImageAssets.arrowLoginIcon,
-              buttonText: AppStrings.login.tr(),
-              fun: () {
-                _submit();
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return AppStrings.enter_password.tr();
               }
+              return null;
+            },
+            takeValue: (_) {},
           ),
-          const SizedBox(height: AppGap.g50)
+          const SizedBox(height: AppSize.s20),
+
+          // ── Forgot Password ──────────────────────────────────────────
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+            child: Align(
+              alignment: Alignment.centerLeft,
+              child: GestureDetector(
+                onTap: () {
+                  // TODO: navigate to forgot password screen
+                },
+                child: Text(
+                  AppStrings.forgot_Password.tr(),
+                  style: getMediumStyle(
+                    color: ColorManager.colorBlue09,
+                    fontSize: FontSize.size17,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: AppSize.s20),
+
+          // ── Login Button ─────────────────────────────────────────────
+          MyButton(
+            color: widget.isLoading
+                ? ColorManager.colorBlue02.withValues(alpha: 0.6)
+                : ColorManager.colorBlue02,
+            icon: ImageAssets.arrowLoginIcon,
+            buttonText: AppStrings.login.tr(),
+            fun: widget.isLoading ? () {} : _submit,
+          ),
+          const SizedBox(height: AppSize.s30),
         ],
       ),
     );

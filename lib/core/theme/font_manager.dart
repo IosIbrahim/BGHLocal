@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 class FontConstants {
-  static const String fontFamily = "Inter";
+  static const String fontFamily = "Nunito";
 }
 
 class FontWeightManager {

@@ -1,3 +1,5 @@
+/// Clean domain session model — lives in core, has no feature dependencies.
+/// Represents the logged-in user across the entire app.
 class UserSession {
   final String empId;
   final String empNameEn;
@@ -10,7 +12,6 @@ class UserSession {
   final bool isUnlimited;
   final String inboxCount;
   final String oracleDate;
-  final String userId;
 
   const UserSession({
     required this.empId,
@@ -24,7 +25,6 @@ class UserSession {
     required this.isUnlimited,
     required this.inboxCount,
     required this.oracleDate,
-    this.userId = '',
   });
 
   factory UserSession.fromJson(Map<String, dynamic> json) => UserSession(
@@ -39,7 +39,6 @@ class UserSession {
         isUnlimited: json['isUnlimited'] ?? false,
         inboxCount: json['inboxCount'] ?? '0',
         oracleDate: json['oracleDate'] ?? '',
-        userId: json['userId'] ?? '',
       );
 
   Map<String, dynamic> toJson() => {
@@ -54,36 +53,5 @@ class UserSession {
         'isUnlimited': isUnlimited,
         'inboxCount': inboxCount,
         'oracleDate': oracleDate,
-        'userId': userId,
       };
-
-  UserSession copyWith({
-    String? empId,
-    String? empNameEn,
-    String? empNameAr,
-    String? defaultGroup,
-    String? defaultBranch,
-    String? hospNameEn,
-    String? hospNameAr,
-    bool? isCashier,
-    bool? isUnlimited,
-    String? inboxCount,
-    String? oracleDate,
-    String? userId,
-    String? hospId,
-  }) =>
-      UserSession(
-        empId: empId ?? this.empId,
-        empNameEn: empNameEn ?? this.empNameEn,
-        empNameAr: empNameAr ?? this.empNameAr,
-        defaultGroup: defaultGroup ?? this.defaultGroup,
-        defaultBranch: defaultBranch ?? this.defaultBranch,
-        hospNameEn: hospNameEn ?? this.hospNameEn,
-        hospNameAr: hospNameAr ?? this.hospNameAr,
-        isCashier: isCashier ?? this.isCashier,
-        isUnlimited: isUnlimited ?? this.isUnlimited,
-        inboxCount: inboxCount ?? this.inboxCount,
-        oracleDate: oracleDate ?? this.oracleDate,
-        userId: userId ?? this.userId,
-      );
 }
