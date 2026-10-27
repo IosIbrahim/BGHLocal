@@ -13,7 +13,7 @@ class LoginFooter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
+      padding: const EdgeInsets.symmetric(horizontal: AppPadding.p8),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

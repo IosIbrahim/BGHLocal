@@ -4,6 +4,8 @@ class AppStrings {
   static const password = "password";
   static const enter_userName = "enter_userName";
   static const enter_password = "enter_password";
+  static const contact_us = "contact_us";
+  static const search_doctor = "search_doctor";
   static const forgot_Password = "forgotPassword";
   static const forgot = "forgot";
   static const login = "login";
@@ -26,8 +28,8 @@ class AppStrings {
   static const terms_conditions = "terms_conditions";
   static const privacy_policy = "privacy_policy";
   static const sign_up = "sign_up";
-  static const terms_link = "https://patientmobapp.alsalamhosp.com/mobileapitest/images/prhterms.pdf";
-  static const privacy_link = "https://patientmobapp.alsalamhosp.com/mobileapitest/images/prhterms.pdf";
+  static const terms_link = "";
+  static const privacy_link = "";
 
 
 
@@ -36,4 +38,16 @@ class AppStrings {
   static const search = "search";
   static const documents = "documents";
   static const userProfile = "userProfile";
+}
+
+class AppRadius {
+  // border radii and shadow blur/spread radii
+  static const double r2 = 2.0;
+  static const double r4 = 4.0;
+  static const double r8 = 8.0;
+  static const double r12 = 12.0;
+  static const double r16 = 16.0;
+  static const double r20 = 20.0;
+  static const double r24 = 24.0;
+  static const double r25 = 25.0;
 }

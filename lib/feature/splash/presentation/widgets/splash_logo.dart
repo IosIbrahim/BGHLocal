@@ -9,7 +9,7 @@ class SplashLogo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Image.asset(ImageAssets.splashLogo),
+      child: Image.asset(ImageAssets.bghSplash),
     );
   }
 }

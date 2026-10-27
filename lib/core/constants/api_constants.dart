@@ -1,7 +1,8 @@
 
 class ApiConstants {
-  static const String baseUrl = 'https://patientmobapp.alsalamhosp.com/mobileapitest/api/';
-  static const String devBaseUrl = 'http://192.168.1.15/mobileApi/api/';
+  static const String baseUrl = 'https://pr-h1services04.sherafia.bhg.com.sa/MobileApi/api/';
+  static const String devBaseUrl = 'https://pr-h1services04.sherafia.bhg.com.sa/MobileApitest/api/';
+  static const String imageUrl = 'https://pr-h1services04.sherafia.bhg.com.sa/MobileApitest';
   static const String empty = '';
   static const int zero = 0;
 

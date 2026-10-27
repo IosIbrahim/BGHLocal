@@ -1,9 +1,11 @@
 {
   "sign_in": "Sign In",
-  "user_name" : "UserNameْ",
+  "user_name" : "UserName",
   "password" : "Password",
   "enter_userName" : "Enter UserName",
   "enter_password": "Enter Password",
+  "contact_us": "   Contact Us   ",
+  "search_doctor": "Search For Doctor",
   "forgotPassword" : "Forgot Your Password?",
   "forgot": "Forgot",
   "login" : "Login",

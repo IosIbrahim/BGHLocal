@@ -1,0 +1,11 @@
+framework module cryptography_flutter_plus {
+  umbrella header "cryptography_flutter_plus-umbrella.h"
+
+  export *
+  module * { export * }
+}
+
+module cryptography_flutter_plus.Swift {
+  header "cryptography_flutter_plus-Swift.h"
+  requires objc
+}

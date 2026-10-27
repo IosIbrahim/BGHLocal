@@ -3,6 +3,10 @@ const String jsonPath = "assets/json";
 
 class ImageAssets {
   static const String splashLogo = "$imagePath/ic_baksh_logo.png";
+  static const String bghSplash = "$imagePath/ic_splash_screen.png";
+  static const String contactUs = "$imagePath/ic_contactus.png";
+  static const String doctorSearch = "$imagePath/ic_doctor_search.png";
+
   static const String logoText = "$imagePath/logo_text.png";
   
   static const String eyeClosedIcon = "$imagePath/ic_eye_closed.svg";

@@ -9,6 +9,8 @@ import '../cubit/login_state.dart';
 import '../widgets/login_footer.dart';
 import '../widgets/login_form.dart';
 import '../widgets/login_header.dart';
+import '../widgets/login_contact.dart';
+import '../widgets/login_doctor.dart';
 
 /// Login Screen — orchestration only.
 ///
@@ -66,7 +68,49 @@ class LoginScreen extends StatelessWidget {
                             // TODO: navigate to registration screen
                           },
                         ),
-                        const SizedBox(height: AppSize.s50),
+                        const SizedBox(height: AppSize.s10),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: colorDarkOrLightMode(false, ColorManager.colorGray37, ColorManager.white),
+                                borderRadius: BorderRadius.circular(AppRadius.r20),
+                                boxShadow: [
+                                  BoxShadow(color: Colors.black.withValues(alpha: 0.06),
+                                    blurRadius: AppRadius.r16, offset: const Offset(0, AppRadius.r4),
+                                  ),
+                                ],
+                              ),
+                              child: LoginContact(
+                                onContactTap:() {
+                                  // TODO: navigate to contactus screen
+
+                                }
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(8.0),
+                              decoration: BoxDecoration(
+                                color: colorDarkOrLightMode(false, ColorManager.colorGray37, ColorManager.white),
+                                borderRadius: BorderRadius.circular(AppRadius.r20),
+                                boxShadow: [
+                                  BoxShadow(color: Colors.black.withValues(alpha: 0.06),
+                                    blurRadius: AppRadius.r16, offset: const Offset(0, AppRadius.r4),
+                                  ),
+                                ],
+                              ),
+                              child: LoginDoctor(
+                                onSearchTap: () {
+                                  // TODO: navigate to doctor search screen
+
+                                },
+                              ),
+                            ),
+                          ],
+                        )
                       ],
                     ),
                   ),
