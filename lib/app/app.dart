@@ -1,6 +1,7 @@
+import 'dart:ui' as ui;
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'dart:ui' as ui;
 
 import '../core/core.dart';
 
@@ -13,6 +14,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
+
   @override
   void didChangeDependencies() {
     _appPreferences.getLocale().then((locale) {
@@ -28,7 +30,7 @@ class _MyAppState extends State<MyApp> {
       supportedLocales: context.supportedLocales,
       locale: context.locale,
       debugShowCheckedModeBanner: false,
-      // Add RTL support based on current locale
+      theme: ThemeData(fontFamily: 'Inter'),
       builder: (context, child) {
         return Directionality(
           textDirection: context.locale.languageCode == 'ar'
@@ -39,6 +41,7 @@ class _MyAppState extends State<MyApp> {
       },
       onGenerateRoute: RouteGenerator.getRoute,
       initialRoute: Routes.splashRoute,
+      navigatorKey: RouteGenerator.navigatorKey,
     );
   }
 }

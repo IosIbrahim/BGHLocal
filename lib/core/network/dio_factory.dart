@@ -4,7 +4,7 @@ import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 import '../constants/constants.dart';
 import 'interceptors/auth_interceptor.dart';
-import 'interceptors/error_interceptor.dart';
+import 'interceptors/session_interceptor.dart';
 import '../storage/storage.dart';
 
 const String APPLICATION_JSON = 'application/json';
@@ -37,13 +37,13 @@ class DioFactory {
 
     dio.interceptors.addAll([
       AuthInterceptor(_tokenStorage), // Dynamic token injection
-      ErrorInterceptor(),              // Typed error mapping
+      SessionInterceptor(_appPreferences, _tokenStorage), // Global 401 handling
       if (!kReleaseMode)
         PrettyDioLogger(
           requestHeader: true,
           requestBody: true,
           responseHeader: false,
-        ),
+        )
     ]);
 
     return dio;

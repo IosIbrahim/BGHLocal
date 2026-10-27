@@ -191,9 +191,10 @@ class ModelLoginResponseRemote {
     };
   }
 
-  UserSession toSession() {
+  UserSession toDomain() {
     return UserSession(
       empId: empId ?? '',
+      userId: customUsername ?? '',
       empNameEn: empEnName ?? nameEn ?? '',
       empNameAr: empArName ?? nameAr ?? '',
       defaultGroup: defaultGroup ?? '',

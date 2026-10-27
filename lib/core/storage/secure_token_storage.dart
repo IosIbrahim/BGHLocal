@@ -1,9 +1,8 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
-/// Stores the auth token encrypted using OS Keystore (Android) / Keychain (iOS).
-/// Must be used for ALL sensitive session data instead of SharedPreferences.
 class SecureTokenStorage {
   static const _tokenKey = 'auth_token';
+  static const _sessionKey = 'user_session';
 
   final FlutterSecureStorage _storage;
 
@@ -20,4 +19,13 @@ class SecureTokenStorage {
     final token = await getToken();
     return token != null && token.isNotEmpty;
   }
+
+  // ─── User session (JSON-encoded UserSession) ───────────────────────────────
+
+  Future<void> saveSession(String sessionJson) =>
+      _storage.write(key: _sessionKey, value: sessionJson);
+
+  Future<String?> getSession() => _storage.read(key: _sessionKey);
+
+  Future<void> deleteSession() => _storage.delete(key: _sessionKey);
 }

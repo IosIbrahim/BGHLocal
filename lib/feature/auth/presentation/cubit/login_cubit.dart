@@ -9,13 +9,13 @@ class LoginCubit extends Cubit<LoginState> {
 
   Future<void> login(String username, String password) async {
     emit(const LoginLoading());
-    try {
-      final session = await _loginUseCase(
-        LoginParams(username: username, password: password),
-      );
-      emit(LoginSuccess(session));
-    } catch (e) {
-      emit(LoginError(e.toString()));
-    }
+    final result = await _loginUseCase(
+      LoginParams(username: username, password: password),
+    );
+    
+    result.when(
+      success: (session) => emit(LoginSuccess(session)),
+      error: (failure) => emit(LoginError(failure.message)),
+    );
   }
 }

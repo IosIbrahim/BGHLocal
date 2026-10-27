@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import '../theme/style_manager.dart';
 import '../theme/theme.dart';
 
 class MyButton extends StatelessWidget {
@@ -32,22 +31,22 @@ class MyButton extends StatelessWidget {
       ),
       child: MaterialButton(
         color: color,
-        height: AppSize.s50,
+        height: AppDimension.d50,
         splashColor: color.withValues(alpha: 0.2),
         onPressed: fun,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppSize.s25),
+          borderRadius: BorderRadius.circular(AppRadius.r25),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (icon.isNotEmpty)
-              SvgPicture.asset(icon, width: AppSize.s20, height: AppSize.s20),
-            if (icon.isNotEmpty) const SizedBox(width: AppSize.s4),
+              SvgPicture.asset(icon, width: AppIconSize.i20, height: AppIconSize.i20),
+            if (icon.isNotEmpty) const SizedBox(width: AppGap.g4),
             Text(
               buttonText,
               style:
-                  getBoldStyle(color: buttonTextColor, fontSize: AppSize.s16),
+                  getBoldStyle(color: buttonTextColor, fontSize: AppFontSize.f16),
             )
           ],
         ),

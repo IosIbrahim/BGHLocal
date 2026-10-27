@@ -1,24 +1,30 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:dr_baksh_dashboard/core/resources/app_strings.dart';
+
 sealed class Failure implements Exception {
-  final String message;
-  const Failure(this.message);
+  final String rawMessage;
+  final bool isLocalizationKey;
+  const Failure(this.rawMessage, {this.isLocalizationKey = true});
+
+  String get message => isLocalizationKey ? rawMessage.tr() : rawMessage;
 }
 
 class NetworkFailure extends Failure {
-  const NetworkFailure([String message = 'No internet connection']) : super(message);
+  const NetworkFailure([super.message = AppStrings.noInternetConnection, bool isLocalizationKey = true]) : super(isLocalizationKey: isLocalizationKey);
 }
 
 class ServerFailure extends Failure {
-  const ServerFailure([String message = 'Server error occurred']) : super(message);
+  const ServerFailure([super.message = AppStrings.serverErrorOccurred, bool isLocalizationKey = true]) : super(isLocalizationKey: isLocalizationKey);
 }
 
 class AuthFailure extends Failure {
-  const AuthFailure([String message = 'Authentication failed']) : super(message);
+  const AuthFailure([super.message = AppStrings.authenticationFailed, bool isLocalizationKey = true]) : super(isLocalizationKey: isLocalizationKey);
 }
 
 class TimeoutFailure extends Failure {
-  const TimeoutFailure([String message = 'Connection timed out']) : super(message);
+  const TimeoutFailure([super.message = AppStrings.connectionTimedOut, bool isLocalizationKey = true]) : super(isLocalizationKey: isLocalizationKey);
 }
 
 class CacheFailure extends Failure {
-  const CacheFailure([String message = 'Cache error']) : super(message);
+  const CacheFailure([super.message = AppStrings.cacheError, bool isLocalizationKey = true]) : super(isLocalizationKey: isLocalizationKey);
 }

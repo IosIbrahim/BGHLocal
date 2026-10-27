@@ -1,18 +1,41 @@
-import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
+import 'package:flutter/foundation.dart';
 
 Future<String> resolveComputerName() async {
-  final plugin = DeviceInfoPlugin();
+  final deviceInfo = DeviceInfoPlugin();
   try {
-    if (Platform.isAndroid) {
-      final info = await plugin.androidInfo;
-      return '${info.manufacturer} ${info.model}'.trim();
-    }
-    if (Platform.isIOS) {
-      final info = await plugin.iosInfo;
-      return info.utsname.machine.isNotEmpty ? info.utsname.machine : info.name;
+    if (kIsWeb) {
+      final webInfo = await deviceInfo.webBrowserInfo;
+      // return webInfo.userAgent ?? "Web Browser";
+      return "Web Browser";
+    } else if (defaultTargetPlatform == TargetPlatform.android) {
+      final androidInfo = await deviceInfo.androidInfo;
+      return androidInfo.model ?? "Unknown Android Device";
+    } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+      final iosInfo = await deviceInfo.iosInfo;
+      return iosInfo.name ?? "Unknown iOS Device";
+    } else {
+      return "Unsupported Platform";
     }
   } catch (_) {}
-  return 'FlutterPatient';
+  return 'Dashboard';
+}
+
+
+Future<String> getDeviceId() async {
+  final deviceInfo = DeviceInfoPlugin();
+
+  if (kIsWeb) {
+    final webInfo = await deviceInfo.webBrowserInfo;
+    return webInfo.vendor ?? (webInfo.userAgent ?? "web");
+  } else if (defaultTargetPlatform == TargetPlatform.android) {
+    final androidInfo = await deviceInfo.androidInfo;
+    return androidInfo.id ?? "";
+  } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+    final iosInfo = await deviceInfo.iosInfo;
+    return iosInfo.identifierForVendor ?? "";
+  } else {
+    return "Unsupported Platform";
+  }
 }

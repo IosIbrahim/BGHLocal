@@ -7,12 +7,10 @@ class LoginParams {
   const LoginParams({required this.username, required this.password});
 }
 
-/// Single-responsibility use case: orchestrates the login operation.
-class LoginUseCase extends UseCase<UserSession, LoginParams> {
+class LoginUseCase {
   final AuthRepository _repository;
   LoginUseCase(this._repository);
 
-  @override
-  Future<UserSession> call(LoginParams params) =>
+  Future<Result<UserSession>> call(LoginParams params) =>
       _repository.login(params.username, params.password);
 }

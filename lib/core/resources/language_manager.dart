@@ -1,5 +1,6 @@
 
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 
 enum LanguageType { ENGLISH, ARABIC }
@@ -27,4 +28,10 @@ class LanguageManager {
     return Localizations.localeOf(context).languageCode;
   }
 
+}
+
+extension LocaleX on BuildContext {
+  /// True when the active locale is Arabic. Use this instead of repeating
+  /// `context.locale.languageCode == 'ar'` across widgets.
+  bool get isArabic => locale.languageCode == ARABIC;
 }
