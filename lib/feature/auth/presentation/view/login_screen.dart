@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,19 +14,14 @@ import '../widgets/login_contact.dart';
 import '../widgets/login_doctor.dart';
 
 /// Login Screen — orchestration only.
-///
-/// Responsibilities (per Constitution §2):
-///  1. Provide BLoC via BlocProvider
-///  2. Listen to state changes (loading dialog, error toast, navigation)
-///  3. Compose feature sub-widgets: LoginHeader, LoginForm, LoginFooter
-///  4. Handle system UI / back-press behaviour
-///
-/// This file never contains layout/padding logic or TextEditingControllers.
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    // Explicitly listen to locale changes to trigger rebuild
+    final _ = context.locale;
+
     return BlocProvider<LoginCubit>(
       create: (_) => instance<LoginCubit>(),
       child: BlocConsumer<LoginCubit, LoginState>(
@@ -50,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         // ── Header: logos + welcome text ──────────────
-                        const LoginHeader(),
+                        LoginHeader(),
 
                         // ── Form: fields + forgot password + button ────
                         LoginForm(
@@ -71,46 +67,61 @@ class LoginScreen extends StatelessWidget {
                         const SizedBox(height: AppSize.s10),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-
                           children: [
                             Container(
                               padding: const EdgeInsets.all(8.0),
                               decoration: BoxDecoration(
-                                color: colorDarkOrLightMode(false, ColorManager.colorGray37, ColorManager.white),
-                                borderRadius: BorderRadius.circular(AppRadius.r20),
+                                color: colorDarkOrLightMode(
+                                  false,
+                                  ColorManager.colorGray37,
+                                  ColorManager.white,
+                                ),
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.r20),
                                 boxShadow: [
-                                  BoxShadow(color: Colors.black.withValues(alpha: 0.06),
-                                    blurRadius: AppRadius.r16, offset: const Offset(0, AppRadius.r4),
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.06),
+                                    blurRadius: AppRadius.r16,
+                                    offset: const Offset(0, AppRadius.r4),
                                   ),
                                 ],
                               ),
                               child: LoginContact(
-                                onContactTap:() {
-                                  // TODO: navigate to contactus screen
-
-                                }
+                                onContactTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    Routes.contactUsRoute,
+                                  );
+                                },
                               ),
                             ),
                             Container(
                               padding: const EdgeInsets.all(8.0),
                               decoration: BoxDecoration(
-                                color: colorDarkOrLightMode(false, ColorManager.colorGray37, ColorManager.white),
-                                borderRadius: BorderRadius.circular(AppRadius.r20),
+                                color: colorDarkOrLightMode(
+                                  false,
+                                  ColorManager.colorGray37,
+                                  ColorManager.white,
+                                ),
+                                borderRadius:
+                                    BorderRadius.circular(AppRadius.r20),
                                 boxShadow: [
-                                  BoxShadow(color: Colors.black.withValues(alpha: 0.06),
-                                    blurRadius: AppRadius.r16, offset: const Offset(0, AppRadius.r4),
+                                  BoxShadow(
+                                    color: Colors.black.withValues(alpha: 0.06),
+                                    blurRadius: AppRadius.r16,
+                                    offset: const Offset(0, AppRadius.r4),
                                   ),
                                 ],
                               ),
                               child: LoginDoctor(
                                 onSearchTap: () {
                                   // TODO: navigate to doctor search screen
-
                                 },
                               ),
                             ),
                           ],
-                        )
+                        ),
+                        const SizedBox(height: AppSize.s20),
                       ],
                     ),
                   ),

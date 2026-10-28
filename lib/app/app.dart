@@ -13,12 +13,19 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AppPreferences _appPreferences = instance<AppPreferences>();
+  bool _isInitialLocaleLoaded = false;
+
   @override
   void didChangeDependencies() {
-    _appPreferences.getLocale().then((locale) {
-      if (mounted) context.setLocale(locale);
-    });
     super.didChangeDependencies();
+    if (!_isInitialLocaleLoaded) {
+      _isInitialLocaleLoaded = true;
+      _appPreferences.getLocale().then((locale) {
+        if (mounted && context.locale != locale) {
+          context.setLocale(locale);
+        }
+      });
+    }
   }
 
   @override

@@ -31,13 +31,28 @@ class AppStrings {
   static const terms_link = "";
   static const privacy_link = "";
 
-
-
   // Home screen strings
   static const home = "home";
   static const search = "search";
   static const documents = "documents";
   static const userProfile = "userProfile";
+
+  // Contact Us screen strings
+  static const contact_us_title = "contact_us_title";
+  static const stay_in_touch_title = "stay_in_touch_title";
+  static const stay_in_touch_desc = "stay_in_touch_desc";
+  static const contact_details = "contact_details";
+  static const short_unified_number = "short_unified_number";
+  static const contact_email_label = "contact_email_label";
+  static const contact_phone_title = "contact_phone_title";
+  static const contact_phone_numbers = "contact_phone_numbers";
+  static const our_locations = "our_locations";
+
+  // Language dialog strings
+  static const choose_favorite_language = "choose_favorite_language";
+  static const change_language = "change_language";
+  static const arabic = "arabic";
+  static const english = "english";
 }
 
 class AppRadius {

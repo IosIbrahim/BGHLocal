@@ -5,11 +5,6 @@ import '../../../../core/core.dart';
 
 /// Owns the Form, TextEditingControllers, field validation,
 /// the "Forgot Password" link, and the Login button.
-///
-/// Constitution rules applied:
-/// - StatefulWidget only because it owns ephemeral local state (controllers)
-/// - Exposes behavior exclusively via [onSubmit] callback
-/// - Never reads BLoC state — receives [isLoading] as a plain bool
 class LoginForm extends StatefulWidget {
   /// Called when the form is valid and the user taps Login.
   final void Function(String username, String password) onSubmit;
@@ -56,7 +51,7 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          // ── Username Field ───────────────────────────────────────────
+          // ── Username Field ───────────────────────────────────────
           MyTextFieldWithTitle(
             hint: AppStrings.user_name.tr(),
             title: '',
@@ -74,7 +69,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const SizedBox(height: AppSize.s12),
 
-          // ── Password Field ───────────────────────────────────────────
+          // ── Password Field ───────────────────────────────────────
           MyTextFieldWithTitle(
             hint: AppStrings.password.tr(),
             title: '',
@@ -92,11 +87,11 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const SizedBox(height: AppSize.s20),
 
-          // ── Forgot Password ──────────────────────────────────────────
+          // ── Forgot Password ──────────────────────────────────────
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: AppPadding.p20),
             child: Align(
-              alignment: Alignment.centerLeft,
+              alignment: AlignmentDirectional.centerStart,
               child: GestureDetector(
                 onTap: () {
                   // TODO: navigate to forgot password screen
@@ -113,7 +108,7 @@ class _LoginFormState extends State<LoginForm> {
           ),
           const SizedBox(height: AppSize.s20),
 
-          // ── Login Button ─────────────────────────────────────────────
+          // ── Login Button ─────────────────────────────────────────
           MyButton(
             color: widget.isLoading
                 ? ColorManager.colorBlue02.withValues(alpha: 0.6)

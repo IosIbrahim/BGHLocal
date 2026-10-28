@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../core/core.dart';
 
-/// Renders the logo pair and the "Sign In / Welcome Back" title block.
-/// Purely presentational — zero state, zero callbacks.
+/// Renders the language switcher icon, the logo pair, and the "Sign In / Welcome Back" title block.
 class LoginHeader extends StatelessWidget {
   const LoginHeader({super.key});
 
@@ -12,7 +11,38 @@ class LoginHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: AppSize.s40),
+        // ── Language Switcher Icon (top start) ────────────────────
+        Padding(
+          padding: const EdgeInsets.only(
+            top: AppPadding.p8,
+            left: AppPadding.p20,
+            right: AppPadding.p20,
+          ),
+          child: Align(
+            alignment: AlignmentDirectional.topStart,
+            child: InkWell(
+              borderRadius: BorderRadius.circular(AppRadius.r20),
+              onTap: () => showLanguageDialog(context),
+              child: Padding(
+                padding: const EdgeInsets.all(AppPadding.p4),
+                child: Image.asset(
+                  ImageAssets.ic_contact_web,
+                  width: AppSize.s28,
+                  height: AppSize.s28,
+                  fit: BoxFit.contain,
+                  errorBuilder: (_, __, ___) => const Icon(
+                    Icons.language,
+                    color: Color(0xff00ABC8),
+                    size: AppSize.s28,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSize.s20),
+
+        // ── Logos ──────────────────────────────────────────────────
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -31,6 +61,8 @@ class LoginHeader extends StatelessWidget {
           ],
         ),
         const SizedBox(height: AppSize.s30),
+
+        // ── Welcome Text ───────────────────────────────────────────
         Text(
           AppStrings.sign_in.tr(),
           style: getBoldStyle(

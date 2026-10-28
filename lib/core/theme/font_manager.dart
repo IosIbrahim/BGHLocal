@@ -1,4 +1,4 @@
-import 'dart:ui';
+﻿import 'dart:ui';
 
 class FontConstants {
   static const String fontFamily = "Nunito";
@@ -24,4 +24,5 @@ class FontSize {
   static const double size25 = 25.0;
   static const double size33 = 33.0;
   static const double size10 = 10.0;
+  static const double size13 = 13.0;
 }
